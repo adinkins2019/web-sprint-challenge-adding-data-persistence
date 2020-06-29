@@ -1,11 +1,12 @@
 const PORT = 9000
 const express = require('express')
 const projectsRouter = require('./projects/projectsRouter')
+const resourcesRouter = require('./resources/resourcesRouter')
 const server = express()
 
 server.use(express.json())
 server.use('/projects', projectsRouter)
-
+server.use('/resources', resourcesRouter)
 server.use( (err, req, res, next) => {
     console.log(err)
     res.status(500).json({
