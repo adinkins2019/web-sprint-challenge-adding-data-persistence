@@ -16,13 +16,22 @@ const findTasksByProjectID = (projID) => {
         .select("t.id", "t.description", "p.name", "p.description")
 }
 
-const addProject = async (project) => {
-    await db('projects as p')
+const findTaskByTaskID = (projID, taskID) => {
+    return db("tasks as t")
+            .join("projects as p","p.id", "t.projectID")
+            .where("t.projectID", projID)
+            .where("t.id", taskID)
+            .first("t.id", "t.description", "t.notes", "t.isCompleted")
+}
+
+const addProject = (project) => {
+    return db('projects as p')
         .insert(projects)
 
 }
 
-const addTasks = (projID) = {
+const addTask = (projID, task) => {
+    return db('tasks as t').insert(task).where('t.projectID', projID)
 
 }
 
@@ -30,4 +39,6 @@ module.exports = {
     findProjects,
     findProjectsById,
     findTasksByProjectID,
+    addProject,
+    addTask
 }
