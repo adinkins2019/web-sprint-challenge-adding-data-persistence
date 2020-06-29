@@ -1,3 +1,4 @@
+const resourceModel = require('./resource-model')
 const express = require('express')
 const router = express.Router()
 
